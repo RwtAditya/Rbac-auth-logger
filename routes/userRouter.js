@@ -1,11 +1,10 @@
 const {Router} = require("express");
-const path = require("path");
-const authController = require("../controllers/authController");
-
+const verifyToken = require("../middleware/authMiddleware");
+const userController = require("../controllers/userController");
 const userRouter = Router();
 
-userRouter.post("/login", authController.loginUser);
-userRouter.post("/register", authController.registerUser);
+userRouter.get("/profile", verifyToken, userController.getProfile);
+userRouter.put("/update-profile", verifyToken, userController.updateProfile);
 
 
 module.exports = userRouter;
