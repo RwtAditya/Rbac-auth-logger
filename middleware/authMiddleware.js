@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const verifyToken  = (req, res, next) => {
+exports.verifyToken  = (req, res, next) => {
     const token = req.headers["authorization"]?.split[" "][1];
     console.log(token);
     if(!token) {
