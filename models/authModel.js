@@ -15,6 +15,26 @@ exports.findByEmail = async (email) => {
     return result.rows[0];
 }
 
+exports.getUsers = async () => {
+    const query = "SELECT * FROM users";
+    const result = await pool.query(query);
+
+    return result;
+}
+
+exports.deleteUser = async (userId) => {
+    const query = "DELETE FROM users WHERE id = $1 RETURNING *";
+    const result = await pool.query(query, [userId]);
+
+    return result.rows[0];
+}
+
+exports.updateProfile = async (userId, name) => {
+    const query = "UPDATE users SET name = $1 WHERE id = $2 RETURNING id, name, email";
+    const result = await pool.query(query, [userId, name]);
+
+    return result.rows[0];
+}
 
 //user_roles table queries
 exports.asignUserRole = async (userId, roleId) => {
@@ -27,6 +47,13 @@ exports.asignUserRole = async (userId, roleId) => {
 exports.getUserRoleId = async (userId) => {
     const query = "SELECT role_id FROM user_roles WHERE user_id = $1";
     const result = await pool.query(query, [userId]);
+
+    return result.rows[0];
+}
+
+exports.updateUserRole = async (userId, roleId) => {
+    const query = "UPDATE TABLE user_roles SET role_id = $1 WHERE user_id = $2 RETURNING *";
+    const result = await pool.query(query, [roleId,userId]);
 
     return result.rows[0];
 }
