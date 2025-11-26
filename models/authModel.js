@@ -74,7 +74,7 @@ exports.getRoleName = async (roleId) => {
     return result.rows[0];
 }
 
-//reports table queries (if exists, else remove from moderatorController)
+//reports table queries
 exports.getAllReports = async () => {
     const query = "SELECT * FROM reports";
     const result = await pool.query(query);
