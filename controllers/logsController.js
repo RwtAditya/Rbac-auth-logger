@@ -20,7 +20,7 @@ exports.filterLogs = async (req, res) => {
     }
     catch(err) {
         console.error("Error fetching logs", err.stack);
-        return res.status(500).json({message: "Internal Serer Error"});
+        return res.status(500).json({message: "Internal Server Error"});
     }
 
 }
