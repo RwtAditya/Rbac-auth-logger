@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-exports.requireRole = (allowedRoles) => {
+exports.requireRole = (...allowedRoles) => {
     return (req,res, next) => {
         const role = req.user.role;
         if(role === "admin") {
