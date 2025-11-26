@@ -1,5 +1,5 @@
-const Moderator = require("../models/authModel");
-const router = Router(); 
+const {Router} = require("express");
+const Moderator = require("../models/authModel"); 
 
 exports.reports = async (req, res) => {
     try {
