@@ -31,7 +31,7 @@ exports.deleteUser = async (userId) => {
 
 exports.updateProfile = async (userId, name) => {
     const query = "UPDATE users SET name = $1 WHERE id = $2 RETURNING id, name, email";
-    const result = await pool.query(query, [userId, name]);
+    const result = await pool.query(query, [name,userId]);
 
     return result.rows[0];
 }
@@ -52,7 +52,7 @@ exports.getUserRoleId = async (userId) => {
 }
 
 exports.updateUserRole = async (userId, roleId) => {
-    const query = "UPDATE TABLE user_roles SET role_id = $1 WHERE user_id = $2 RETURNING *";
+    const query = "UPDATE user_roles SET role_id = $1 WHERE user_id = $2 RETURNING *";
     const result = await pool.query(query, [roleId,userId]);
 
     return result.rows[0];
@@ -72,4 +72,12 @@ exports.getRoleName = async (roleId) => {
     const result = await pool.query(query, [roleId]);
 
     return result.rows[0];
+}
+
+//reports table queries (if exists, else remove from moderatorController)
+exports.getAllReports = async () => {
+    const query = "SELECT * FROM reports";
+    const result = await pool.query(query);
+
+    return result.rows;
 }
